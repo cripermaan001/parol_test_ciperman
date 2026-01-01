@@ -265,6 +265,15 @@
 			return arr;
 		}
 
+		// So'zlar ro'yxati (odam tanlagandek passphrase uchun)
+		const words = [
+			"olma", "banan", "apelsin", "gilos", "shaftoli", "nok", "anor", "uzum", "qovun", "tarvuz",
+			"olcha", "mandarin", "kiwi", "ananas", "limon", "greyfurt", "kivi", "mango", "papaya", "kakos", "yong'oq",
+			"bodom", "findiq", "pista", "qahva", "choy", "shakar", "asal", "sut", "yog'", "tuz", "murch", "zanjabil", "sarimsoq",
+			"piyoz", "kartoshka", "sabzi", "bodring", "pomidor", "baqlajon", "qovoq", "karam", "ismaloq", "salat", "baliq", "go'sht", "tovuq", "mol", "qo'y", "cho'chqa", "yog'och", "olov", "suv", "havo", "yer", "osmon", "yulduz", "oy", "quyosh", "bulut", "shamol", "tog'", "daryo", "ko'l", "o'rmon", "cho'l", "sahro"
+		];
+
+		// Belgilar aralashmasi uchun random generator
 		function genRandomString(length){
 			const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:,.<>/?~';
 			const bytes = secureRandomBytes(length);
@@ -274,16 +283,18 @@
 			}
 			return out;
 		}
-		
-		function humanPassword() {
-		  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-		
-		  const part1 = pick(['Blue', 'Dark', 'Neo', 'Crip', 'Alpha', 'Kuz']);
-		  const part2 = pick(words);
-		  const part3 = pick(['!', '@', '_', '-']);
-		  const part4 = Math.floor(Math.random() * 90 + 10); // 2 xonali raqam
-		
-		  return ${part1}${part2}${part3}${part4};
+
+		// Odam tanlagandek passphrase generatori
+		function genPassphrase(wordCount) {
+			const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+			let parts = [];
+			for (let i = 0; i < wordCount; i++) {
+				parts.push(pick(words));
+			}
+			// Maxsus belgi va raqam
+			const special = pick(['!', '@', '_', '-']);
+			const number = Math.floor(Math.random() * 90 + 10); // 2 xonali raqam
+			return parts.join('-') + special + number;
 		}
 
 		generateBtn.addEventListener('click', ()=>{
@@ -315,4 +326,3 @@
 	</script>
 </body>
 </html>
-
