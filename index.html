@@ -274,16 +274,16 @@
 			}
 			return out;
 		}
-
-		function genPassphrase(wordCount){
-			// small internal wordlist (keeps everything local) - for stronger passphrases users should use their own words
-			const words = ['!','$',')','u4','894','131','s93','*^(&)','(&**(*))','*%^^!@','@(8)','q#!@','c@#!@)','da312','ke$#','to!#@#@#h','ba323','sh232'];
-			const bytes = secureRandomBytes(wordCount);
-			let out = [];
-			for(let i=0;i<wordCount;i++){
-				out.push(words[bytes[i] % words.length]);
-			}
-			return out.join('-');
+		
+		function humanPassword() {
+		  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+		
+		  const part1 = pick(['Blue', 'Dark', 'Neo', 'Crip', 'Alpha', 'Kuz']);
+		  const part2 = pick(words);
+		  const part3 = pick(['!', '@', '_', '-']);
+		  const part4 = Math.floor(Math.random() * 90 + 10); // 2 xonali raqam
+		
+		  return ${part1}${part2}${part3}${part4};
 		}
 
 		generateBtn.addEventListener('click', ()=>{
